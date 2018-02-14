@@ -7,21 +7,21 @@
 
 static uint64_t test_gettimeofday(void)
 {
-    struct timeval tv;
-    if (gettimeofday(&tv, NULL) == -1) {
+	struct timeval tv;
+	if (gettimeofday(&tv, NULL) == -1) {
 		perror("gettimeofday");
 		exit(EXIT_FAILURE);
-    }
+	}
 
-    return (uint64_t) tv.tv_sec * 10E9 + (uint64_t) tv.tv_usec / 10E9;
+	return (uint64_t) tv.tv_sec * 10E9 + (uint64_t) tv.tv_usec / 10E9;
 }
 
 static void
 test_nanosleep(const char *name, uint64_t total_wait_ms, uint64_t sleep_for_ms)
 {
-    struct timespec ts;
-    ts.tv_sec = sleep_for_ms / 1000;
-    ts.tv_nsec = sleep_for_ms % 1000 * 1000000;
+	struct timespec ts;
+	ts.tv_sec = sleep_for_ms / 1000;
+	ts.tv_nsec = sleep_for_ms % 1000 * 1000000;
 
 	size_t calls_cnt = 0;
 	uint64_t rem_ms = 0;

@@ -48,11 +48,10 @@ void bench_sleep_for_fn(
 
 uint64_t loopfn(size_t it, uint64_t (*fn)(void))
 {
-  uint64_t ts = 0;
-  for (size_t i = 0; i < it; i++) {
-      ts += fn();
-  }
-  return ts;
+	uint64_t ts = 0;
+	for (size_t i = 0; i < it; i++)
+		ts += fn();
+	return ts;
 }
 
 void benchfn(size_t it, uint64_t (*fn)(void), const char *name)

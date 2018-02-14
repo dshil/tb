@@ -18,13 +18,13 @@ clock_serv_t host_clock;
 static uint64_t test_clock_get_time(void)
 {
 	kern_return_t ret = KERN_SUCCESS;
-    mach_timespec_t now;
+	mach_timespec_t now;
 
-    ret = clock_get_time(host_clock, &now);
-    if (ret != KERN_SUCCESS) {
+	ret = clock_get_time(host_clock, &now);
+	if (ret != KERN_SUCCESS) {
 		mach_error("clock_get_time: ", ret);
 		exit(EXIT_FAILURE);
-    }
+	}
 
 	return (uint64_t) (now.tv_sec * 10E9 +
 			(now.tv_nsec) % 1000000000);
@@ -33,14 +33,14 @@ static uint64_t test_clock_get_time(void)
 static void
 test_mach_clock_sleep(const char *name, uint64_t total_wait_ms, uint64_t ms)
 {
-    mach_timespec_t ts;
-    ts.tv_sec = (unsigned int) ms / 1000;
-    ts.tv_nsec = (int) ms % 1000 * 1000000;
+	mach_timespec_t ts;
+	ts.tv_sec = (unsigned int) ms / 1000;
+	ts.tv_nsec = (int) ms % 1000 * 1000000;
 
 	size_t cnt = 0;
 	uint64_t avg = 0;
 
-    kern_return_t ret = KERN_SUCCESS;
+	kern_return_t ret = KERN_SUCCESS;
 	for (;;) {
 		for (;;) {
 			ret = clock_sleep(MACH_PORT_NULL, TIME_RELATIVE, ts, NULL);
@@ -84,12 +84,11 @@ static void start_mach_clock_get_time_test(int *iterations, int iter_len)
 	if (ret != KERN_SUCCESS) {
 		mach_error("mach_port_deallocate: ", ret);
 		exit(EXIT_FAILURE);
-    }
+	}
 }
 
 int main()
 {
-
 	int iterations[] = {1000, 1000000, 5000000};
 	size_t it = 2000000;
 
